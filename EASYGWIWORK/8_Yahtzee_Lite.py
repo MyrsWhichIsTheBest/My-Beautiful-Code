@@ -5,6 +5,7 @@ import easygui
 # variables for global
 player_1 = easygui.enterbox("What is P1's name")
 player_2 = easygui.enterbox("What is P2's name")
+names = [player_1, player_2]
 
 
 def list_formatter(input_list, message):  # formats the list into a nice bullet point string for easyGUI
@@ -36,11 +37,12 @@ def result_table(input_list, loop_num):  # result_table() takes in the list and 
 
 
 while True:
-    # variables
-    rolls = 3  # number of times this will be rolled
-    players = [player_1, player_2]
-
+    players = [0, 0]
+    winner = ""
     for player in range(2):
+        # variables
+        rolls = 3  # number of times this will be rolled
+        easygui.msgbox(f"{names[player]}'s turn!")
         while rolls > 0:
             results = []
             for i in range(5):
@@ -49,15 +51,16 @@ while True:
             results.sort()
             print(list_formatter(results, "Numbers rolled:") + "\n")
             if rolls > 1:
-                if easygui.buttonbox(list_formatter(results, "Numbers rolled:") + "\n" + result_table(results, player), choices=["Re-roll", "Stick"]) == "Stick":
+                if easygui.buttonbox(list_formatter(results, "Numbers rolled:") + "\n" + result_table(results, player), names[player], ["Re-roll", "Stick"]) == "Stick":
                     break
                 else:
                     rolls -= 1
+                    players[player] = 0
             else:
-                easygui.msgbox(list_formatter(results, "Numbers rolled:") + "\n" + result_table(results, player))
+                easygui.msgbox(list_formatter(results, "Numbers rolled:") + "\n" + result_table(results, player), names[player])
                 rolls -= 1
 
-    print(players[0], players[1])
+        print(players[0], players[1])
 
     if players[0] == players[1]:
         easygui.msgbox(f"Draw!")
@@ -68,3 +71,5 @@ while True:
             winner = player_1
         if easygui.buttonbox(f"Player {winner} won! \n Do you want to play another round?", choices=["Yes", "No"]) == "No":
             break
+
+# sorry I had a hectic weekend :)
