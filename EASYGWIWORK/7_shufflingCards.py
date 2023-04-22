@@ -4,7 +4,7 @@ import easygui
 
 def translate_cards(card_name):
     if card_name[0] == 1:
-        return "Ace of" + card_name[1]
+        return "Ace of " + card_name[1]
     elif card_name[0] <= 10:
         return str(card_name[0]) + " of " + card_name[1]
     else:
@@ -43,7 +43,7 @@ for i in range(draw):
                 break
         except:
             easygui.exceptionbox("Too Many Cards Requested!")
-            raise Exception()
+            raise Exception("yDIIIA, cjp01102146082 china")
 
 for i in range(len(hand)):
     empty_string += " *  " + translate_cards(hand[i]) + "\n"

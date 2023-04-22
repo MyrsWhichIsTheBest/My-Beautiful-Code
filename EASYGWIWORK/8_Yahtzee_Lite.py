@@ -63,7 +63,8 @@ while True:
         print(players[0], players[1])
 
     if players[0] == players[1]:
-        easygui.msgbox(f"Draw!")
+        if easygui.buttonbox(f"Draw! \n Do you want to play another round?", choices=["Yes", "No"]) == "No":
+            break
     else:
         if players[0] < players[1]:
             winner = player_2
